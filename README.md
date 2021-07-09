@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# REACT - Conceitos Básicos
+==========================================
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Instalar o Yarn
+`$ npm install --global yarn`
 
-## Available Scripts
+## Criação de um projeto React
+`$ yarn create react-app meu-app`
 
-In the project directory, you can run:
 
-### `yarn start`
+## Arquivos básicos de um projeto React
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 1 - Arquivo que contem a Função ou Classe React: `\src\App.js`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Neste arquivo podemos ter componentes do tipo Classe ou Função.
 
-### `yarn test`
+#### Exemplo de componente do tipo classe:
+```
+class App extends React.Component{
+    render(){
+        return (
+            <div>
+                <p>Linha 1</p>
+                <p>Linha 2</p>
+		        <p>{ new Date().toLocaleDateString("pt-BR") }</p>
+            </div>
+        );
+    }
+}
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* O que desejarmos mostrar na tela usando nosso componente é feito pelo método render(). Ele deve retornar um HTML.
+* Todo seu HTML deve estar envolvido em um elemento raiz: Ex: `<div>...</div>`
+* Se você não quiser colocar um tag HTML como raiz (algumas vezes isso conflita com css da página e coisas do tipo), você pode colocar um Fragment, que é basicamente uma tag vazia: `<> ... </>`
+* No return podemos fazer uso do JSX, nele podemos misturar: HTML, componentes React(1) e JavaScript(2).
+    * (1) Se colocarmos uma tag que tenha o mesmo nome de um componente ele será renderizado onde a tag estiver
+    * (2) Podemos inserir código JavaScript entre chaves contanto que ele produza um retorno
 
-### `yarn build`
+### 2 - Arquivo responsável pela injeção do react na página HTML: `\src\index.js`
+Nele eu especifico: 
+1. Quais componentes vou usar: `<App/> <App2/>`
+2. Em qual elemento os mesmos vão ser injetados: `"root"`
+3. Os repectivos parâmetros (props) para os mesmos.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+ReactDOM.render(
+  <React.StrictMode>
+    <App date={ new Date().toLocaleDateString("pt-BR") } author='Carlos Sales'/>
+    <App2 title="Salmo 91">
+      Aquele que habita no abrigo do Altíssimo e descansa à sombra do Todo-poderoso pode dizer ao Senhor: "Tu és o meu refúgio e a minha fortaleza, o meu Deus, em quem confio".
+    </App2>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+````
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* O método ReactDOM.Render renderiza o componente <App /> na página dentro de um elemento HTML.
+* A linha `document.getElementById('root')` define que o elemento HTML onde o react será injetado é um que tenha um ID = 'root'.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3 - Arquivo HTML que recebe o componente React
+`\public\index.html`
 
-### `yarn eject`
+### Props / Parâmetros
+Podemos receber parâmetros pelo construtor do componente. No React, esses parâmetros são chamados de "props".
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+class App2 extends React.Component{
+  constructor(props){
+    super(props);
+  }
+  render(){
+    return(
+    <div className="box">
+        <div className="date">{this.props.date}</div>
+        <div className="author">{this.props.author}</div>
+    </div>
+    );
+  }
+}
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Props.children
+Se seu texto for grande ou contiver HTML ou qualquer outra coisa que torne-o inconveniente para passar por props (porque não poderia ser um atributo na tag), podemos usar outra abordagem: qualquer coisa que você colocar entre a abertura e o fechamento das tags do componente serão passados como props.children para o componente! Isso inclui HTML, outros componentes, e até javascript, contanto que esteja entre chaves.
+```
+<App2 title="Salmo 91">
+    Aquele que habita no abrigo do Altíssimo e descansa à sombra do Todo-poderoso pode dizer ao Senhor: "Tu és o meu refúgio e a minha fortaleza, o meu Deus, em quem confio".
+</App2>
+``` 
