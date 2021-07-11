@@ -7,16 +7,16 @@
 `$ yarn create react-app meu-app`
 
 ## Rodar aplicação
-`yarn start`
+`$ yarn start`
 
 ## Estrutura de um projeto React - principais arquivos
 
 ![Estrutura de arquivos em um projeto React.js](/public/estrutura_arquivos_react.png)
 
 
-### 1 - Arquivo que contem a Função ou Classe React: `\src\App.js`
+### 1 - Arquivo que contem a Função ou Classe React: 
 
-Neste arquivo podemos ter componentes do tipo Classe ou Função.
+`\src\App.js` => Neste arquivo podemos ter componentes do tipo Classe ou Função.
 
 #### Exemplo de componente do tipo classe:
 ```
@@ -40,8 +40,10 @@ class App extends React.Component{
     * (1) Se colocarmos uma tag que tenha o mesmo nome de um componente ele será renderizado onde a tag estiver
     * (2) Podemos inserir código JavaScript entre chaves contanto que ele produza um retorno
 
-### 2 - Arquivo responsável pela injeção do react na página HTML: `\src\index.js`
-Nele eu especifico: 
+### 2 - Arquivo responsável pela injeção do react na página HTML: 
+
+`\src\index.js` => Nele especificamos: 
+
 1. Quais componentes vou usar: `<App/> <App2/>`
 2. Em qual elemento os mesmos vão ser injetados: `"root"`
 3. Os repectivos parâmetros (props) para os mesmos.
@@ -61,7 +63,10 @@ ReactDOM.render(
 * O método ReactDOM.Render renderiza o componente <App /> na página dentro de um elemento HTML.
 * A linha `document.getElementById('root')` define que o elemento HTML onde o react será injetado é um que tenha um ID = 'root'.
 
-### 3 - Arquivo HTML que recebe o componente React: `\public\index.html`
+### 3 - Arquivo HTML que recebe o componente React: 
+
+`\public\index.html`
+
 ```
 <!DOCTYPE html>
 <html lang="en">
@@ -75,6 +80,7 @@ ReactDOM.render(
 ```
 
 ### Props / Parâmetros
+
 Podemos receber parâmetros pelo construtor do componente. No React, esses parâmetros são chamados de "props".
 
 ```
@@ -94,6 +100,7 @@ class App2 extends React.Component{
 ```
 
 #### Props.children
+
 Se seu texto for grande ou contiver HTML ou qualquer outra coisa que torne-o inconveniente para passar por props (porque não poderia ser um atributo na tag), podemos usar outra abordagem: qualquer coisa que você colocar entre a abertura e o fechamento das tags do componente serão passados como `props.children` para o componente! Isso inclui HTML, outros componentes, e até javascript, contanto que esteja entre chaves. Exemplo:
 ```
 <App2 title="Salmo 91">
