@@ -6,8 +6,13 @@
 ## Criação de um projeto React
 `$ yarn create react-app meu-app`
 
+## Rodar aplicação
+`yarn start`
 
-## Arquivos básicos de um projeto React
+## Estrutura de um projeto React - principais arquivos
+
+![Estrutura de arquivos em um projeto React.js](/public/estrutura_arquivos_react.png)
+
 
 ### 1 - Arquivo que contem a Função ou Classe React: `\src\App.js`
 
@@ -69,7 +74,7 @@ ReactDOM.render(
 </html>
 ```
 
-### 4 - Props / Parâmetros
+### Props / Parâmetros
 Podemos receber parâmetros pelo construtor do componente. No React, esses parâmetros são chamados de "props".
 
 ```
@@ -95,3 +100,38 @@ Se seu texto for grande ou contiver HTML ou qualquer outra coisa que torne-o inc
     Aquele que habita no abrigo do Altíssimo e descansa à sombra do Todo-poderoso pode dizer ao Senhor: "Tu és o meu refúgio e a minha fortaleza, o meu Deus, em quem confio".
 </App2>
 ``` 
+
+### Estados
+
+Os estados são como os atributos de uma classe, em se falando de FrontEnd os estados representam os atributos dos elementos HTML presentes na tela. 
+
+Para criar um componente com estado no React é fácil, no construtor faremos um modelo do estado com valores padrão. Usaremos então um método chamado setState() quando quisermos alterar o estado.
+
+```
+import React from 'react';
+
+class App3 extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = { nome : '' }
+  }
+  changeNome = (evt) => {
+    this.setState({ nome : evt.target.value});
+  }
+  render(){
+    return(
+      <>
+        nome: <input type='text' value={this.state.nome} onChange={this.changeNome}/>
+        <p>Olá {this.state.nome}</p>
+      </>
+    );
+  }
+}
+
+export default App3;
+```
+Observe que ao digitar qualquer letra o estado já vai se modificando e todos os elementos HTML que utilizam aquele estado são atualizados imediatamente.
+
+Uma pequena observação sobre o setState(): não é necessário passar o objeto completo do estado para o setState, ele é inteligente o suficiente para fazer modificações parciais.
+
+Ou seja se temos um estado como { nome : 'teste', idade : 20 } e fazemos setState({ idade : 21 }), apenas a idade é atualizada, o estado não é substituído pelo objeto que passamos perdendo o nome.

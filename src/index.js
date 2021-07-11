@@ -8,14 +8,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import App2 from './components/App2';
+import Formulario from './components/Formulario';
 
 ReactDOM.render(
   <React.StrictMode>
 
     <App date={ new Date().toLocaleDateString("pt-BR") } author='Carlos Sales'/>
+    
     <App2 title="Salmo 91">
       Aquele que habita no abrigo do Altíssimo e descansa à sombra do Todo-poderoso pode dizer ao Senhor: "Tu és o meu refúgio e a minha fortaleza, o meu Deus, em quem confio".
     </App2>
+
+    <Formulario></Formulario>
 
   </React.StrictMode>,
 
