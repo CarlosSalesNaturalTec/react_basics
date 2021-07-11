@@ -1,5 +1,4 @@
 # REACT - Conceitos Básicos
-==========================================
 
 ## Instalar o Yarn
 `$ npm install --global yarn`
@@ -57,10 +56,20 @@ ReactDOM.render(
 * O método ReactDOM.Render renderiza o componente <App /> na página dentro de um elemento HTML.
 * A linha `document.getElementById('root')` define que o elemento HTML onde o react será injetado é um que tenha um ID = 'root'.
 
-### 3 - Arquivo HTML que recebe o componente React
-`\public\index.html`
+### 3 - Arquivo HTML que recebe o componente React: `\public\index.html`
+```
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>React App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+```
 
-### Props / Parâmetros
+### 4 - Props / Parâmetros
 Podemos receber parâmetros pelo construtor do componente. No React, esses parâmetros são chamados de "props".
 
 ```
@@ -80,7 +89,7 @@ class App2 extends React.Component{
 ```
 
 #### Props.children
-Se seu texto for grande ou contiver HTML ou qualquer outra coisa que torne-o inconveniente para passar por props (porque não poderia ser um atributo na tag), podemos usar outra abordagem: qualquer coisa que você colocar entre a abertura e o fechamento das tags do componente serão passados como props.children para o componente! Isso inclui HTML, outros componentes, e até javascript, contanto que esteja entre chaves.
+Se seu texto for grande ou contiver HTML ou qualquer outra coisa que torne-o inconveniente para passar por props (porque não poderia ser um atributo na tag), podemos usar outra abordagem: qualquer coisa que você colocar entre a abertura e o fechamento das tags do componente serão passados como `props.children` para o componente! Isso inclui HTML, outros componentes, e até javascript, contanto que esteja entre chaves. Exemplo:
 ```
 <App2 title="Salmo 91">
     Aquele que habita no abrigo do Altíssimo e descansa à sombra do Todo-poderoso pode dizer ao Senhor: "Tu és o meu refúgio e a minha fortaleza, o meu Deus, em quem confio".
